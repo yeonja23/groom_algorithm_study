@@ -1,9 +1,12 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
 public class Main {
-    static int toInt(String s) { return Integer.parseInt(s); }
+    static int toInt(String s) { return Integer.parseInt(s);}
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -14,20 +17,18 @@ public class Main {
         int N = toInt(st.nextToken());
         int K = toInt(st.nextToken());
 
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        st = new StringTokenizer(br.readLine());
 
-        int count = 0;
-        while (count < N) {
-            st = new StringTokenizer(br.readLine());
-            while (st.hasMoreTokens() && count < N) {
-                pq.offer(toInt(st.nextToken()));
-                if (count >= K)
-                    bw.write(pq.poll() + " ");
-                count++;
-            }
+        PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
+
+        for(int i=0; i<N; i++) {
+            pq.offer(toInt(st.nextToken()));
+
+            if(i >= K)
+                bw.write(pq.poll() + " ");
         }
 
-        while (!pq.isEmpty())
+        while(!pq.isEmpty())
             bw.write(pq.poll() + " ");
         bw.flush();
     }
